@@ -68,9 +68,9 @@ class 运算():
         return str(self)
 
 运算优先级={'+':0,'-':0,'*':1,'/':1}
-def 算24(n:list,找全解=False):
+def 算24(n:list,全解:bool=False):
     '''参数n:4个数字组成的列表
-    找全解:False-找到一个解就返回,字符串;True-找出所有解并以列表返回.
+    全解:False-找到一个解就返回,字符串;True-找出所有解并以列表返回.
     '''
     for 顺序 in 排列(4):
         牌 = []
@@ -85,7 +85,7 @@ def 算24(n:list,找全解=False):
                         括号1= 运算优先级[op2.op]>运算优先级[op1.op]
                         括号2= 运算优先级[op3.op]>运算优先级[op2.op]
                         算术表达式=f'{"(" if 括号2 else ""}{"(" if 括号1 else ""}{牌[0]} {op1.op} {牌[1]}{")" if 括号1 else ""} {op2.op} {牌[2]}{")" if 括号2 else ""} {op3.op} {牌[3]}'
-                        if not 找全解:return 算术表达式
+                        if not 全解:return 算术表达式
                         解.append(算术表达式)
         for op1 in 四则运算(牌[0],牌[1]).枚举():
             for op3 in 四则运算(牌[2],牌[3]).枚举():
@@ -93,17 +93,19 @@ def 算24(n:list,找全解=False):
                     if op2==24:
                         # print(op1,op2,op3)
                         算术表达式=f'({牌[0]} {op1.op} {牌[1]}) {op2.op} ({牌[2]} {op3.op} {牌[3]})'
-                        if not 找全解:return 算术表达式
+                        if not 全解:return 算术表达式
                         解.append(算术表达式)
-    return 解
+    if 全解:
+        return 解
+    else:
+        return ''
+
 
 
 if __name__=='__main__':
     # n = [random.randint(1, 13) for i in range(4)]
-    # n=[11,2,6,3]
-    # n=[5,2,3,5]
-    # n=[11,5,6,2]
-    # print(n)
+    n=[11,6,10,7]
+    print(n,算24(n))
     有解=0
     已测=0
     for i in range(1,14):
