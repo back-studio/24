@@ -101,18 +101,18 @@ def 算24(n:list):
                         算术表达式=f'({牌[0]} {op1.op} {牌[1]}) {op2.op} ({牌[2]} {op3.op} {牌[3]})'
                         解.append(算术表达式)
     return 解
-
-有解=0
-已测=0
-for i in range(1,14):
-    for j in range(1,14):
-        for k in range(1,14):
-            for l in range(1,14):
-                n=[i,j,k,l]
-                解=算24(n)
-                if 解:
-                    有解+=1
-                已测 +=1
-                if 已测%1000==0:
-                    print(已测,有解,f'{有解/已测:.1%}')
-print(已测,有解,f'{有解/已测:.1%}')
+if __name__=='__main__':
+    有解=0
+    已测=0
+    for i in range(1,14):
+        for j in range(1,14):
+            for k in range(1,14):
+                for l in range(1,14):
+                    n=[i,j,k,l]
+                    解=算24(n)
+                    if 解:
+                        有解+=1
+                    已测 +=1
+                    if 已测%1000==0:
+                        print(已测,有解,f'{有解/已测:.1%}')
+    print(已测,有解,f'{有解/已测:.1%}')
